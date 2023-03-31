@@ -12,6 +12,8 @@
         "esModuleInterop": true,
 
         // Permitir arquivos js no projeto
-        "allowJs": true
+        "allowJs": true,
+
+        "strictNullChecks": true
     }
 }
