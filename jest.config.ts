@@ -4,6 +4,12 @@
  */
 
 export default {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  transform: {
+    '^.+\\.ts?$': 'ts-jest'
+  },
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
   roots: ['<rootDir>/src'],
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
 
