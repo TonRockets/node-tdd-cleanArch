@@ -1,14 +1,11 @@
 import type { EmailValidator } from '../protocols/email-validator'
+import type { AccountModel } from '../../domain/models/account'
+import type { AddAccount, AddAccountModel } from '../../domain/usecases/add-account'
 
 import { SignUpController } from './signup'
 import { MissingParamError } from '../errors/missing-param-error'
 import { InvalidParamError } from '../errors/invalid-param-error'
 import { ServerError } from '../errors/server-error'
-
-interface SutTypes {
-  sut: SignUpController
-  emailValidatorStub: EmailValidator
-}
 
 // a Factory Pattern
 const makeEmailValidator = (): EmailValidator => {
@@ -19,6 +16,22 @@ const makeEmailValidator = (): EmailValidator => {
   }
 
   return new EmailValidatorStub()
+}
+
+const makeAddAccount = (): AddAccount => {
+  class AddAccountStup implements AddAccount {
+    add(account: AddAccountModel): AccountModel {
+      const fakeAccount = {
+        id: 'valid_id',
+        name: 'valid_name',
+        email: 'valid_email@email.com',
+        password: 'valid_password'
+      }
+      return fakeAccount
+    }
+  }
+
+  return new AddAccountStup()
 }
 
 // // Creating a new EmailValidator's instance to set a internal error exception
@@ -32,13 +45,21 @@ const makeEmailValidator = (): EmailValidator => {
 //   return new EmailValidatorStub()
 // }
 
+interface SutTypes {
+  sut: SignUpController
+  emailValidatorStub: EmailValidator
+  addAccountStub: AddAccount
+}
+
 // a Factory pattern
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator()
-  const sut = new SignUpController(emailValidatorStub)
+  const addAccountStub = makeAddAccount()
+  const sut = new SignUpController(emailValidatorStub, addAccountStub)
   return {
     sut,
-    emailValidatorStub
+    emailValidatorStub,
+    addAccountStub
   }
 }
 
@@ -116,7 +137,9 @@ describe('SignUp Controller', () => {
     because toBe compare type and value of an object, the toEqual just
     compare a value.
     */
-    expect(httpResponse?.body).toEqual(new MissingParamError('passwordConfirmation'))
+    expect(httpResponse?.body).toEqual(
+      new MissingParamError('passwordConfirmation')
+    )
   })
 
   test('Should return 400 if password confirmation fails', () => {
@@ -136,7 +159,9 @@ describe('SignUp Controller', () => {
     because toBe compare type and value of an object, the toEqual just
     compare a value.
     */
-    expect(httpResponse?.body).toEqual(new InvalidParamError('passwordConfirmation'))
+    expect(httpResponse?.body).toEqual(
+      new InvalidParamError('passwordConfirmation')
+    )
   })
 
   test('Should return 400 if an invalid email is no provided', () => {
@@ -198,5 +223,24 @@ describe('SignUp Controller', () => {
     compare a value.
     */
     expect(httpResponse?.body).toEqual(new ServerError())
+  })
+
+  test('Should calls AddAccount with correct values', () => {
+    const { sut, addAccountStub } = makeSut()
+    const addSpy = jest.spyOn(addAccountStub, 'add')
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_email@email.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
+    }
+    sut.handle(httpRequest)
+    expect(addSpy).toHaveBeenCalledWith({
+      name: 'any_name',
+      email: 'any_email@email.com',
+      password: 'any_password'
+    })
   })
 })
