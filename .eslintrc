@@ -8,6 +8,8 @@
         "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/method-signature-style": "off",
         "no-unneeded-ternary": "off",
-        "no-useless-catch": "off"
+        "no-useless-catch": "off",
+        "@typescript-eslint/no-confusing-void-expression": "off",
+        "@typescript-eslint/return-await": "off"
     }
 }
