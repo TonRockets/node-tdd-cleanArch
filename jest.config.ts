@@ -3,21 +3,17 @@
  * https://jestjs.io/docs/configuration
  */
 
-export default {
-  preset: 'ts-jest',
+module.exports = {
+  roots: ['<rootDir>/src'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+  coverageDirectory: 'coverage',
   testEnvironment: 'node',
   transform: {
     '^.+\\.ts?$': 'ts-jest'
   },
+  preset: 'ts-jest',
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
-  roots: ['<rootDir>/src'],
-  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
-
-  // Indicates whether the coverage information should be collected while executing the test
-  collectCoverage: true,
-
   // The directory where Jest should output its coverage files
-  coverageDirectory: 'coverage',
   coverageProvider: 'v8'
 
   // A list of reporter names that Jest uses when writing coverage reports
