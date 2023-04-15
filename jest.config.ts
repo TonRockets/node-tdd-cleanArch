@@ -11,10 +11,7 @@ module.exports = {
   transform: {
     '^.+\\.ts?$': 'ts-jest'
   },
-  preset: [
-    'ts-jest',
-    '@shelf/jest-mongodb'
-  ],
+  preset: '@shelf/jest-mongodb',
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   // The directory where Jest should output its coverage files
   coverageProvider: 'v8'
