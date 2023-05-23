@@ -18,7 +18,7 @@ describe('Account Mongo repository', () => {
     const account = sut.add({
       name: 'any_name',
       email: 'any_email@mail.com',
-      password: 'any_password'
+      password: 'any_password',
     })
 
     expect(account).toBeTruthy()

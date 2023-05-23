@@ -9,12 +9,12 @@ module.exports = {
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
   transform: {
-    '^.+\\.ts?$': 'ts-jest'
+    '^.+\\.ts?$': 'ts-jest',
   },
   preset: '@shelf/jest-mongodb',
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   // The directory where Jest should output its coverage files
-  coverageProvider: 'v8'
+  coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [

@@ -3,7 +3,7 @@ import type {
   Controller,
   HttpRequest,
   HttpResponse,
-  AddAccount
+  AddAccount,
 } from './signup-protocols'
 
 import { MissingParamError, InvalidParamError } from '../../errors'
@@ -24,7 +24,7 @@ export class SignUpController implements Controller {
         'name',
         'email',
         'password',
-        'passwordConfirmation'
+        'passwordConfirmation',
       ]
       for (const field of requiredFields) {
         if (!httpRequest.body[field]) {
@@ -44,7 +44,7 @@ export class SignUpController implements Controller {
       const account = await this.addAccount.add({
         name,
         email,
-        password
+        password,
       })
       return ok(account)
     } catch (error) {

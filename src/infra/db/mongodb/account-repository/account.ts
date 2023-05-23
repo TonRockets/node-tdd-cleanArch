@@ -11,7 +11,7 @@ export class AccounMongoRepository implements AddAccountRepository {
       id: result.insertedId.toHexString(),
       name: accountData.name,
       email: accountData.email,
-      password: accountData.password
+      password: accountData.password,
     }
   }
 }
