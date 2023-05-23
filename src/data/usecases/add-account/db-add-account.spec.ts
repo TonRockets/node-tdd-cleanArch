@@ -97,7 +97,7 @@ describe('DbAddAccount Usecase', () => {
     jest
       .spyOn(addAccountRepositoryStub, 'add')
       .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
+        Promise.reject(new Error())
       )
     const accountData = {
       name: 'valid_name',
@@ -108,6 +108,7 @@ describe('DbAddAccount Usecase', () => {
     await expect(addReturnPromise).rejects.toThrow()
   })
 
+  // No mock in succesfull case test
   test('Should return an account on success', async () => {
     const { sut } = makeSut()
     const accountData = {

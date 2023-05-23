@@ -1,19 +1,18 @@
 {
     "compilerOptions": {
         "outDir": "./dist",
-
         // Importação dos módulos no padrão ES6
         "module": "CommonJS",
-
         // Js compilado na versão ES2022
         "target": "ES2019",
-
         // Colocar por trás dos panos o import caso exista uma lib ou arquivo que utilize o commonJs
         "esModuleInterop": true,
-
         // Permitir arquivos js no projeto
         "allowJs": true,
-
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "typeRoots": [
+            "./global.d.ts",
+            "./node_modules/@types"
+        ]
     }
 }
