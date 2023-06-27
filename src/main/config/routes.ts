@@ -4,6 +4,6 @@ export default (app: Express): void => {
   const router = Router()
   app.use('/api', router)
   fastG.sync('**/src/main/routes/**routes.ts').map(async (item) => {
-    (await import(`../../../${item}`)).default(router)
+    ;(await import(`../../../${item}`)).default(router)
   })
 }
