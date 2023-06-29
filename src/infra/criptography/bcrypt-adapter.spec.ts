@@ -5,7 +5,7 @@ import { BcryptAdapter } from './bcrypt-adapter'
 jest.mock('bcrypt', () => ({
   async hash(): Promise<string> {
     return new Promise((resolve) => resolve('hash_mocked'))
-  },
+  }
 }))
 
 const salt = 12
@@ -32,7 +32,7 @@ describe('Bcrypt Adapter', () => {
     jest
       .spyOn<any, string>(bcrypt, 'hash')
       .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error())),
+        new Promise((resolve, reject) => reject(new Error()))
       )
     const bcryptReturnPromise = sut.encrypt('any_value')
     await expect(bcryptReturnPromise).rejects.toThrow()

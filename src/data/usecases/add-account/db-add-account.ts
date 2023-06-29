@@ -3,7 +3,7 @@ import type {
   AddAccount,
   AddAccountModel,
   AddAccountRepository,
-  Encrypter,
+  Encrypter
 } from './db-add-account-protocols'
 
 export class DbAddAccount implements AddAccount {
@@ -11,7 +11,7 @@ export class DbAddAccount implements AddAccount {
   private readonly addAccountRepository: AddAccountRepository
   constructor(
     encrypter: Encrypter,
-    addAccountRepository: AddAccountRepository,
+    addAccountRepository: AddAccountRepository
   ) {
     this.encrypter = encrypter
     this.addAccountRepository = addAccountRepository
@@ -21,7 +21,7 @@ export class DbAddAccount implements AddAccount {
     const hashedPassword = await this.encrypter.encrypt(accountData.password)
     const account = await this.addAccountRepository.add({
       ...accountData,
-      password: hashedPassword,
+      password: hashedPassword
     })
     return account
   }
