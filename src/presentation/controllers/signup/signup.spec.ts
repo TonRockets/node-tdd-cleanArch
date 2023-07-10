@@ -212,7 +212,7 @@ describe('SignUp Controller', () => {
     because toBe compare type and value of an object, the toEqual just
     compare a value.
     */
-    expect(httpResponse?.body).toEqual(new ServerError())
+    expect(httpResponse?.body).toEqual(new ServerError(''))
   })
 
   test('Should calls AddAccount with correct values', async () => {
@@ -256,7 +256,7 @@ describe('SignUp Controller', () => {
     because toBe compare type and value of an object, the toEqual just
     compare a value.
     */
-    expect(httpResponse?.body).toEqual(new ServerError())
+    expect(httpResponse?.body).toEqual(new ServerError(''))
   })
 
   test('Should return 200 if data is provided', async () => {
