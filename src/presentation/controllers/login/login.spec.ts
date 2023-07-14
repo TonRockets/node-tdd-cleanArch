@@ -1,9 +1,9 @@
 import { InvalidParamError, MissingParamError } from '../../errors'
 import { badRequest } from '../../helpers/http-helper'
-import { type EmailValidator } from '../signup/signup-protocols'
+import { type HttpRequest, type EmailValidator } from '../signup/signup-protocols'
 import { LoginController } from './login'
 
-const makeFakeRequest = (): any => ({
+const makeFakeRequest = (): HttpRequest => ({
   body: {
     email: 'any_email',
     password: 'any_password'
