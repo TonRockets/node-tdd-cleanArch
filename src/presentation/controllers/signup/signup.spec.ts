@@ -126,7 +126,9 @@ describe('SignUp Controller', () => {
       }
     }
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(badRequest(new MissingParamError('passwordConfirmation')))
+    expect(httpResponse).toEqual(
+      badRequest(new MissingParamError('passwordConfirmation'))
+    )
     /* When we compare object we need to use 'toEqual' instead toBe,
     because toBe compare type and value of an object, the toEqual just
     compare a value.
@@ -144,7 +146,9 @@ describe('SignUp Controller', () => {
       }
     }
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(badRequest(new InvalidParamError('passwordConfirmation')))
+    expect(httpResponse).toEqual(
+      badRequest(new InvalidParamError('passwordConfirmation'))
+    )
     /* When we compare object we need to use 'toEqual' instead toBe,
     because toBe compare type and value of an object, the toEqual just
     compare a value.
