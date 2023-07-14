@@ -203,8 +203,8 @@ describe('SignUp Controller', () => {
     const { sut, addAccountStub } = makeSut()
 
     // This conde implements a new Error, without need to create a new emailValidator's instance
-    jest.spyOn(addAccountStub, 'add').mockImplementationOnce(async () => {
-      return new Promise((resolve, reject) => reject(new Error()))
+    jest.spyOn(addAccountStub, 'add').mockImplementationOnce(() => {
+      throw new Error()
     })
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new ServerError('any_stack')))
