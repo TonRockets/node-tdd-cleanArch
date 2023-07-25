@@ -1,6 +1,6 @@
 import { type Authentication } from '../../../domain/usecases/authentication'
 import { InvalidParamError, MissingParamError } from '../../errors'
-import { badRequest, serverError, unauthorized } from '../../helpers/http-helper'
+import { badRequest, ok, serverError, unauthorized } from '../../helpers/http-helper'
 import {
   type HttpRequest,
   type HttpResponse,
@@ -34,13 +34,11 @@ export class LoginController implements Controller {
       }
 
       const accessToken = await this.authentication.auth(email, password)
-
-      if (!accessToken) return unauthorized()
-
-      return {
-        statusCode: 200,
-        body: httpRequest
+      if (!accessToken) {
+        return unauthorized()
       }
+
+      return ok({ accessToken })
     } catch (error) {
       return serverError(error)
     }
